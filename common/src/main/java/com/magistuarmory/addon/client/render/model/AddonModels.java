@@ -3,14 +3,12 @@ package com.magistuarmory.addon.client.render.model;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.client.render.model.armor.*;
 import com.magistuarmory.addon.client.render.model.decoration.*;
-import com.magistuarmory.api.client.render.model.ModModelsProvider;
 import com.magistuarmory.client.render.model.decoration.RondelModel;
 import com.magistuarmory.client.render.model.decoration.TopDecorationModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 
-public class AddonModels extends ModModelsProvider
-{
+public class AddonModels {
 	public static AddonModels INSTANCE = new AddonModels(EpicKnightsAddon.ID);
 	
 	public static final LayerDefinition SKIRT_MODEL = SkirtModel.createLayer();
@@ -146,6 +144,6 @@ public class AddonModels extends ModModelsProvider
 
 	public AddonModels(String modId)
 	{
-		super(modId);
+		super();
 	}
 }
