@@ -24,9 +24,9 @@ public class EpicKnightsAddon
     public static void init()
     {
 		System.out.println("Hello from Epic Knights Addon init!");
-	    AddonItems.INSTANCE.init();
+	    AddonItems.init();
 	    AddonMerchOffers.init();
 		if (Platform.getEnv() == EnvType.CLIENT)
-			AddonModels.INSTANCE.init(AddonItems.INSTANCE);
+			AddonModels.init();
     }
 }

@@ -3,18 +3,23 @@ package com.magistuarmory.addon.item;
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.item.armor.AddonArmorTypes;
+import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.ArmorType;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.magistuarmory.item.armor.MedievalHorseArmorItem;
 import com.magistuarmory.misc.ModCreativeTabs;
+import dev.architectury.event.events.common.LifecycleEvent;
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
+import net.fabricmc.api.EnvType;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 
@@ -46,7 +51,7 @@ public class AddonItems {
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_FRENCH_HALBERD = addMedievalWeaponItem("steel_french_halberd", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.FRENCH_HALBERD);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_ITALIAN_POLEAXE = addMedievalWeaponItem("steel_italian_poleaxe", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.ITALIAN_POLEAXE);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_SWISS_HALBERD = addMedievalWeaponItem("steel_swiss_halberd", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.SWISS_HALBERD);
-	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_LANCE = registerLanceItem("steel_lance", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.LANCE);
+	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_LANCE = addLanceItem("steel_lance", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.LANCE);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_BROADAXE = addMedievalWeaponItem("steel_broadaxe", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.BROADAXE);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_DANEAXE = addMedievalWeaponItem("steel_daneaxe", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.DANEAXE);
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> STEEL_GALLOWGLASS_AXE = addMedievalWeaponItem("steel_gallowglass_axe", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.STEEL, AddonWeaponTypes.GALLOWGLASS_AXE);
@@ -80,15 +85,15 @@ public class AddonItems {
 	public static final @Nullable RegistrySupplier<MedievalWeaponItem> TRAINING_SWORD = addMedievalWeaponItem("training_sword", new Item.Properties().tab(ModCreativeTabs.PARTICULAR_WEAPONS), ModItemTier.WOOD, AddonWeaponTypes.TRAINING_SWORD);
 
 	//Armor
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_ARMET = registerKnightItem("dark_knight_helmet", AddonArmorTypes.DARK_ARMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_ARMET = addKnightItem("dark_knight_helmet", AddonArmorTypes.DARK_ARMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_KNIGHT_CHESTPLATE = addMedievalArmorItem("dark_knight_chestplate", AddonArmorTypes.DARK_KNIGHT, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_KNIGHT_LEGGINGS = addMedievalArmorItem("dark_knight_leggings", AddonArmorTypes.DARK_KNIGHT, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_KNIGHT_BOOTS = addMedievalArmorItem("dark_knight_boots", AddonArmorTypes.DARK_KNIGHT, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_STECHHELM = registerJoustingItem("dark_jousting_helmet", AddonArmorTypes.DARK_STECHHELM, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_CHESTPLATE = registerJoustingItem("dark_jousting_chestplate", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_LEGGINGS = registerJoustingItem("dark_jousting_leggings", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_BOOTS = registerJoustingItem("dark_jousting_boots", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_STECHHELM = addJoustingItem("dark_jousting_helmet", AddonArmorTypes.DARK_STECHHELM, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_CHESTPLATE = addJoustingItem("dark_jousting_chestplate", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_LEGGINGS = addJoustingItem("dark_jousting_leggings", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_JOUSTING_BOOTS = addJoustingItem("dark_jousting_boots", AddonArmorTypes.DARK_JOUSTING, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_SALLET = addMedievalArmorItem("dark_gothic_helmet", AddonArmorTypes.DARK_SALLET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> DARK_GOTHIC_CHESTPLATE = addMedievalArmorItem("dark_gothic_chestplate", AddonArmorTypes.DARK_GOTHIC, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR));
@@ -350,35 +355,35 @@ public class AddonItems {
 
 
 	// Horse Armor
-	public static final @Nullable RegistrySupplier<MedievalHorseArmorItem> DARK_BARDING = INSTANCE.items.register("dark_barding", () -> new MedievalHorseArmorItem(12, new ResourceLocation(EpicKnightsAddon.ID, "textures/entity/horse/armor/dark_barding.png"), new Item.Properties().tab(ModCreativeTabs.ARMOR).stacksTo(1)));
+	public static final @Nullable RegistrySupplier<MedievalHorseArmorItem> DARK_BARDING = ITEMS.register("dark_barding", () -> new MedievalHorseArmorItem(12, new ResourceLocation(EpicKnightsAddon.ID, "textures/entity/horse/armor/dark_barding.png"), new Item.Properties().tab(ModCreativeTabs.ARMOR).stacksTo(1)));
 
 	// Decorations
-	public static final RegistrySupplier<ArmorDecorationItem> GOLDEN_PINCE_NEZ_DECORATION = addArmorDecorationItem("golden_pince_nez_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "golden_pince_nez"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> STEEL_MUSTACHE_DECORATION = addArmorDecorationItem("steel_mustache_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "steel_mustache"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> STEEL_SKIRT_DECORATION = addArmorDecorationItem("steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "steel_skirt"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_STEEL_SKIRT_DECORATION = addArmorDecorationItem("gilded_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_steel_skirt"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> DARK_STEEL_SKIRT_DECORATION = addArmorDecorationItem("dark_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_steel_skirt"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_STEEL_SKIRT_DECORATION = addArmorDecorationItem("gilded_dark_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_steel_skirt"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> HELMET_RONDEL_DECORATION = addArmorDecorationItem("helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "helmet_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_HELMET_RONDEL_DECORATION = addArmorDecorationItem("gilded_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_helmet_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> DARK_HELMET_RONDEL_DECORATION = addArmorDecorationItem("dark_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_helmet_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_HELMET_RONDEL_DECORATION = addArmorDecorationItem("gilded_dark_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_helmet_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> DARK_HEAVY_SHOULDER_PAD_DECORATION = addArmorDecorationItem("dark_heavy_shoulder_pad_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_heavy_shoulder_pad"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> DARK_SHOULDER_PADS_DECORATION = addArmorDecorationItem("dark_shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_shoulder_pads"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_SHOULDER_PADS_DECORATION = addArmorDecorationItem("gilded_shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_shoulder_pads"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> DARK_RONDEL_DECORATION = addArmorDecorationItem("dark_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_RONDEL_DECORATION = addArmorDecorationItem("gilded_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_RONDEL_DECORATION = addArmorDecorationItem("gilded_dark_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_rondel"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> CHAINMAIL_HOOD_DECORATION = addArmorDecorationItem("chainmail_hood_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "chainmail_hood"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> SHOULDER_PADS_DECORATION = addArmorDecorationItem("shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "shoulder_pads"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> HEAVY_SHOULDER_PAD_DECORATION = addArmorDecorationItem("heavy_shoulder_pad_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "heavy_shoulder_pad"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<ArmorDecorationItem> GOLDEN_BALL_DECORATION = addArmorDecorationItem("golden_ball_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "golden_ball"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
-	public static final RegistrySupplier<ArmorDecorationItem> GORGET_DECORATION = addArmorDecorationItem("gorget_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gorget"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> ROYAL_PLUME_DECORATION = addDyeableArmorDecorationItem("royal_plume_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "royal_plume"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.WHITE.getMaterialColor().col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> HORSE_TAIL_DECORATION = addDyeableArmorDecorationItem("horse_tail_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "horse_tail"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.RED.getMaterialColor().col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> LANDSKNECHT_FEATHERS_DECORATION = addDyeableArmorDecorationItem("landsknecht_feathers_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "landsknecht_feathers"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.WHITE.getMaterialColor().col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> HANGING_CLOTH_DECORATION = addDyeableArmorDecorationItem("hanging_cloth_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "hanging_cloth"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST, DyeColor.RED.getMaterialColor().col));
-	public static final RegistrySupplier<DyeableArmorDecorationItem> UNDERARMOR_DECORATIONS_TUNIC_DECORATION = addDyeableArmorDecorationItem("underarmor_tunic_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "underarmor_tunic"), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST, DyeColor.RED.getMaterialColor().col));
+	public static final RegistrySupplier<ArmorDecorationItem> GOLDEN_PINCE_NEZ_DECORATION = addArmorDecorationItem("golden_pince_nez_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "golden_pince_nez").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> STEEL_MUSTACHE_DECORATION = addArmorDecorationItem("steel_mustache_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "steel_mustache").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> STEEL_SKIRT_DECORATION = addArmorDecorationItem("steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "steel_skirt").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_STEEL_SKIRT_DECORATION = addArmorDecorationItem("gilded_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_steel_skirt").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> DARK_STEEL_SKIRT_DECORATION = addArmorDecorationItem("dark_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_steel_skirt").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_STEEL_SKIRT_DECORATION = addArmorDecorationItem("gilded_dark_steel_skirt_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_steel_skirt").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> HELMET_RONDEL_DECORATION = addArmorDecorationItem("helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "helmet_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_HELMET_RONDEL_DECORATION = addArmorDecorationItem("gilded_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_helmet_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> DARK_HELMET_RONDEL_DECORATION = addArmorDecorationItem("dark_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_helmet_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_HELMET_RONDEL_DECORATION = addArmorDecorationItem("gilded_dark_helmet_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_helmet_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> DARK_HEAVY_SHOULDER_PAD_DECORATION = addArmorDecorationItem("dark_heavy_shoulder_pad_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_heavy_shoulder_pad").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> DARK_SHOULDER_PADS_DECORATION = addArmorDecorationItem("dark_shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_shoulder_pads").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_SHOULDER_PADS_DECORATION = addArmorDecorationItem("gilded_shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_shoulder_pads").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> DARK_RONDEL_DECORATION = addArmorDecorationItem("dark_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_RONDEL_DECORATION = addArmorDecorationItem("gilded_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GILDED_DARK_RONDEL_DECORATION = addArmorDecorationItem("gilded_dark_rondel_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_dark_rondel").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> CHAINMAIL_HOOD_DECORATION = addArmorDecorationItem("chainmail_hood_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "chainmail_hood").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> SHOULDER_PADS_DECORATION = addArmorDecorationItem("shoulder_pads_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "shoulder_pads").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> HEAVY_SHOULDER_PAD_DECORATION = addArmorDecorationItem("heavy_shoulder_pad_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "heavy_shoulder_pad").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<ArmorDecorationItem> GOLDEN_BALL_DECORATION = addArmorDecorationItem("golden_ball_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "golden_ball").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD));
+	public static final RegistrySupplier<ArmorDecorationItem> GORGET_DECORATION = addArmorDecorationItem("gorget_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gorget").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> ROYAL_PLUME_DECORATION = addDyeableArmorDecorationItem("royal_plume_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "royal_plume").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.WHITE.getMaterialColor().col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> HORSE_TAIL_DECORATION = addDyeableArmorDecorationItem("horse_tail_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "horse_tail").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.RED.getMaterialColor().col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> LANDSKNECHT_FEATHERS_DECORATION = addDyeableArmorDecorationItem("landsknecht_feathers_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "landsknecht_feathers").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.HEAD, DyeColor.WHITE.getMaterialColor().col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> HANGING_CLOTH_DECORATION = addDyeableArmorDecorationItem("hanging_cloth_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "hanging_cloth").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST, DyeColor.RED.getMaterialColor().col));
+	public static final RegistrySupplier<DyeableArmorDecorationItem> UNDERARMOR_DECORATIONS_TUNIC_DECORATION = addDyeableArmorDecorationItem("underarmor_tunic_decoration", () -> new DyeableArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "underarmor_tunic").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST, DyeColor.RED.getMaterialColor().col));
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_ORANGE_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_orange_hat_decoration", AddonArmorTypes.LANDSKNECHT_ORANGE_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_MAGENTA_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_magenta_hat_decoration", AddonArmorTypes.LANDSKNECHT_MAGENTA_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_LIGHT_BLUE_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_light_blue_hat_decoration", AddonArmorTypes.LANDSKNECHT_LIGHT_BLUE_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
@@ -394,7 +399,7 @@ public class AddonItems {
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_GREEN_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_green_hat_decoration", AddonArmorTypes.LANDSKNECHT_GREEN_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_RED_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_red_hat_decoration", AddonArmorTypes.LANDSKNECHT_RED_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
 	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_BLACK_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_black_hat_decoration", AddonArmorTypes.LANDSKNECHT_BLACK_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
-	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_WHITE_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_white_hat_decoration", AddonArmorTypes.LANDSKNECHT_WHITE_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);*/
+	public static final RegistrySupplier<DyeableWearableArmorDecorationItem> LANDSKNECHT_WHITE_HAT_DECORATION = addDyeableWearableArmorDecorationItem("landsknecht_white_hat_decoration", AddonArmorTypes.LANDSKNECHT_WHITE_HAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), DyeColor.WHITE.getMaterialColor().col);
 	public static final RegistrySupplier<ArmorDecorationItem> PLACKART_DECORATION = addArmorDecorationItem("plackart_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "plackart").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
 	public static final RegistrySupplier<ArmorDecorationItem> GILDED_PLACKART_DECORATION = addArmorDecorationItem("gilded_plackart_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_plackart").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
 	public static final RegistrySupplier<ArmorDecorationItem> DARK_PLACKART_DECORATION = addArmorDecorationItem("dark_plackart_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "dark_plackart").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
@@ -423,10 +428,10 @@ public class AddonItems {
 	public static final RegistrySupplier<ArmorDecorationItem> GILDED_GORGET_DECORATION = addArmorDecorationItem("gilded_gorget_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "gilded_gorget").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
 	public static final RegistrySupplier<ArmorDecorationItem> SQUARE_BESAGEWS_DECORATION = addArmorDecorationItem("square_besagews_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "square_besagews").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
 	public static final RegistrySupplier<ArmorDecorationItem> CODPIECE_DECORATION = addArmorDecorationItem("codpiece_decoration", () -> new ArmorDecorationItem(new ResourceLocation(EpicKnightsAddon.ID, "codpiece").toString(), new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS), EquipmentSlot.CHEST));
-	public static final RegistrySupplier<WearableArmorDecorationItem> GOLDEN_NECKLACE_DECORATION = registerWearableArmorDecorationItem("golden_necklace_decoration", AddonArmorTypes.GOLDEN_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
-	public static final RegistrySupplier<WearableArmorDecorationItem> SILVER_NECKLACE_DECORATION = registerWearableArmorDecorationItem("silver_necklace_decoration", AddonArmorTypes.SILVER_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
-	public static final RegistrySupplier<WearableArmorDecorationItem> SILVER_CROSS_NECKLACE_DECORATION = registerWearableArmorDecorationItem("silver_cross_necklace_decoration", AddonArmorTypes.SILVER_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
-	public static final RegistrySupplier<WearableArmorDecorationItem> GOLDEN_CROSS_NECKLACE_DECORATION = registerWearableArmorDecorationItem("golden_cross_necklace_decoration", AddonArmorTypes.GOLDEN_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
+	public static final RegistrySupplier<WearableArmorDecorationItem> GOLDEN_NECKLACE_DECORATION = addWearableArmorDecorationItem("golden_necklace_decoration", AddonArmorTypes.GOLDEN_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
+	public static final RegistrySupplier<WearableArmorDecorationItem> SILVER_NECKLACE_DECORATION = addWearableArmorDecorationItem("silver_necklace_decoration", AddonArmorTypes.SILVER_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
+	public static final RegistrySupplier<WearableArmorDecorationItem> SILVER_CROSS_NECKLACE_DECORATION = addWearableArmorDecorationItem("silver_cross_necklace_decoration", AddonArmorTypes.SILVER_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
+	public static final RegistrySupplier<WearableArmorDecorationItem> GOLDEN_CROSS_NECKLACE_DECORATION = addWearableArmorDecorationItem("golden_cross_necklace_decoration", AddonArmorTypes.GOLDEN_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
 
 	public static @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
 	{
@@ -435,6 +440,14 @@ public class AddonItems {
 		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties);
 		ARMOR_ITEMS.add(armor);
 		return armor;
+	}
+
+	public static RegistrySupplier<WearableArmorDecorationItem> addWearableArmorDecorationItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties)
+	{
+		RegistrySupplier<WearableArmorDecorationItem> registrysupplier = AddonItemRegistryHelper.registerWearableArmorDecorationItem(id, material, type, properties);
+	//	ARMOR_DECORATION_ITEMS.add(registrysupplier);
+//		ARMOR_ITEMS.add(registrysupplier);
+		return registrysupplier;
 	}
 
 	public static @Nullable RegistrySupplier<MedievalWeaponItem> addMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
@@ -463,6 +476,17 @@ public class AddonItems {
 		return armor;
 	}
 
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
+		DYEABLE_ITEMS.add(armor);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+
 	public static RegistrySupplier<DyeableArmorDecorationItem> addDyeableArmorDecorationItem(String id, Supplier<DyeableArmorDecorationItem> supplier)
 	{
 		RegistrySupplier<DyeableArmorDecorationItem> registrysupplier = ITEMS.register(id, supplier);
@@ -481,6 +505,15 @@ public class AddonItems {
 		return armor;
 	}
 
+	public static RegistrySupplier<DyeableWearableArmorDecorationItem> addDyeableWearableArmorDecorationItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor)
+	{
+		RegistrySupplier<DyeableWearableArmorDecorationItem> registrysupplier = AddonItemRegistryHelper.registerDyeableWearableArmorDecorationItem(id, material, type, properties, defaultcolor);
+	//	ARMOR_DECORATION_ITEMS.add(registrysupplier);
+		DYEABLE_ITEMS.add(registrysupplier);
+	//	ARMOR_ITEMS.add(registrysupplier);
+		return registrysupplier;
+	}
+
 	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableWearableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
 	{
 		if (type.isDisabled())
@@ -490,5 +523,28 @@ public class AddonItems {
 		ARMOR_ITEMS.add(armor);
 		return armor;
 	}
-	
+
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerJoustingItem(id, type, slot, properties);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static @Nullable RegistrySupplier<MedievalWeaponItem> addLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerLanceItem(id, properties, material, type);
+		WEAPON_ITEMS.add(weapon);
+		return weapon;
+	}
+
+	public static void init() {
+		ITEMS.register();
+		if (Platform.getEnv() == EnvType.CLIENT)
+			LifecycleEvent.SETUP.register(() -> ModRender.setup());
+	}
 }
