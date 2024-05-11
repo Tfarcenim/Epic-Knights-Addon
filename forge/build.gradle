@@ -29,7 +29,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
-    implementation "io.github.magistu:${rootProject.minecraft_version}-epic-knights-forge:${rootProject.epic_knights_version}"
+  //  implementation "io.github.magistu:${rootProject.minecraft_version}-epic-knights-forge:${rootProject.epic_knights_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
