@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class AddonModels {
-	public static AddonModels INSTANCE = new AddonModels(EpicKnightsAddon.ID);
 
 	public static final Map<ModelLayerLocation, Supplier<LayerDefinition>> layers = new HashMap<>();
 

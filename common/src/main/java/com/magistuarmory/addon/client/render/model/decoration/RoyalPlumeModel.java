@@ -11,11 +11,19 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class RoyalPlumeModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
+	private final ModelPart[] parts;
+
 	public RoyalPlumeModel(ModelPart root)
 	{
 		super(root);
+		this.parts = new ModelPart[] { this.head, this.body, this.rightArm, this.leftArm };
 	}
-	
+
+	@Override
+	public ModelPart[] getParts() {
+		return parts;
+	}
+
 	public static LayerDefinition createLayer() 
 	{
 		MeshDefinition meshdefinition = new MeshDefinition();

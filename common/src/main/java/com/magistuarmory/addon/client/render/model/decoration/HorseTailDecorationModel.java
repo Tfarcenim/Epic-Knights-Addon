@@ -11,9 +11,12 @@ import net.minecraft.world.entity.LivingEntity;
 @Environment(EnvType.CLIENT)
 public class HorseTailDecorationModel<T extends LivingEntity> extends ArmorDecorationModel<T>
 {
+	private final ModelPart[] parts;
+
 	public HorseTailDecorationModel(ModelPart root)
 	{
 		super(root);
+		this.parts = new ModelPart[] { this.head, this.body, this.rightArm, this.leftArm };
 	}
 	
 	public static LayerDefinition createLayer() 
@@ -47,5 +50,10 @@ public class HorseTailDecorationModel<T extends LivingEntity> extends ArmorDecor
 		PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 32);
+	}
+
+	@Override
+	public ModelPart[] getParts() {
+		return parts;
 	}
 }

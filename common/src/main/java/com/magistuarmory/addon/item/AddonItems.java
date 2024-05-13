@@ -2,6 +2,7 @@ package com.magistuarmory.addon.item;
 
 import com.magistuarmory.EpicKnights;
 import com.magistuarmory.addon.EpicKnightsAddon;
+import com.magistuarmory.addon.item.armor.AddonArmorType;
 import com.magistuarmory.addon.item.armor.AddonArmorTypes;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.model.Models;
@@ -433,7 +434,7 @@ public class AddonItems {
 	public static final RegistrySupplier<WearableArmorDecorationItem> SILVER_CROSS_NECKLACE_DECORATION = addWearableArmorDecorationItem("silver_cross_necklace_decoration", AddonArmorTypes.SILVER_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
 	public static final RegistrySupplier<WearableArmorDecorationItem> GOLDEN_CROSS_NECKLACE_DECORATION = addWearableArmorDecorationItem("golden_cross_necklace_decoration", AddonArmorTypes.GOLDEN_CROSS_NECKLACE, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeTabs.ARMOR_DECORATIONS));
 
-	public static @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties)
 	{
 		if (type.isDisabled())
 			return null;
@@ -476,7 +477,7 @@ public class AddonItems {
 		return armor;
 	}
 
-	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableMedievalArmorItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
 	{
 		if (type.isDisabled())
 			return null;
@@ -495,7 +496,7 @@ public class AddonItems {
 		return registrysupplier;
 	}
 
-	public static @Nullable RegistrySupplier<MedievalArmorItem> addKnightItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addKnightItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties)
 	{
 		if (type.isDisabled())
 			return null;
@@ -514,7 +515,7 @@ public class AddonItems {
 		return registrysupplier;
 	}
 
-	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableWearableMedievalArmorItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addDyeableWearableMedievalArmorItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties, int defaultcolor)
 	{
 		if (type.isDisabled())
 			return null;
@@ -524,7 +525,7 @@ public class AddonItems {
 		return armor;
 	}
 
-	public static @Nullable RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, ArmorType type, EquipmentSlot slot, Item.Properties properties)
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addJoustingItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties)
 	{
 		if (type.isDisabled())
 			return null;
