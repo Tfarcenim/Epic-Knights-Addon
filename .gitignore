@@ -7,6 +7,5 @@
 /fabric/build/
 /forge/.gradle/
 /forge/build/
-/run/saves
-/run/logs/
+/forge/run/
 .idea/
