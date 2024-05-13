@@ -6,7 +6,11 @@ import com.magistuarmory.addon.item.armor.AddonArmorType;
 import com.magistuarmory.addon.item.armor.AddonArmorTypes;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.model.Models;
-import com.magistuarmory.item.*;
+import com.magistuarmory.item.ArmorDecorationItem;
+import com.magistuarmory.item.DyeableArmorDecorationItem;
+import com.magistuarmory.item.MedievalWeaponItem;
+import com.magistuarmory.item.ModItemTier;
+import com.magistuarmory.item.WeaponType;
 import com.magistuarmory.item.armor.ArmorType;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.magistuarmory.item.armor.MedievalHorseArmorItem;
@@ -29,7 +33,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AddonItems {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(EpicKnights.ID, Registry.ITEM_REGISTRY);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(EpicKnightsAddon.ID, Registry.ITEM_REGISTRY);
 
 	//public static final List<RegistrySupplier<MedievalShieldItem>> SHIELD_ITEMS = new ArrayList<>();
 	public static final List<RegistrySupplier<MedievalWeaponItem>> WEAPON_ITEMS = new ArrayList<>();
@@ -438,7 +442,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties);
 		ARMOR_ITEMS.add(armor);
 		return armor;
 	}
@@ -455,7 +459,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerMedievalWeaponItem(id, properties, material, type);
+		RegistrySupplier<MedievalWeaponItem> weapon = AddonItemRegistryHelper.registerMedievalWeaponItem(id, properties, material, type);
 		WEAPON_ITEMS.add(weapon);
 		return weapon;
 	}
@@ -471,7 +475,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor, modelkey);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor, modelkey);
 		DYEABLE_ITEMS.add(armor);
 		ARMOR_ITEMS.add(armor);
 		return armor;
@@ -481,7 +485,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
 		DYEABLE_ITEMS.add(armor);
 		ARMOR_ITEMS.add(armor);
 		return armor;
@@ -500,7 +504,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerKnightItem(id, type, slot, properties);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerKnightItem(id, type, slot, properties);
 		DYEABLE_ITEMS.add(armor);
 		ARMOR_ITEMS.add(armor);
 		return armor;
@@ -519,7 +523,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerDyeableMedievalArmorItem(id, type, slot, properties, defaultcolor);
 		DYEABLE_ITEMS.add(armor);
 		ARMOR_ITEMS.add(armor);
 		return armor;
@@ -529,7 +533,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalArmorItem> armor = ItemRegistryHelper.registerJoustingItem(id, type, slot, properties);
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerJoustingItem(id, type, slot, properties);
 		ARMOR_ITEMS.add(armor);
 		return armor;
 	}
@@ -538,7 +542,7 @@ public class AddonItems {
 	{
 		if (type.isDisabled())
 			return null;
-		RegistrySupplier<MedievalWeaponItem> weapon = ItemRegistryHelper.registerLanceItem(id, properties, material, type);
+		RegistrySupplier<MedievalWeaponItem> weapon = AddonItemRegistryHelper.registerLanceItem(id, properties, material, type);
 		WEAPON_ITEMS.add(weapon);
 		return weapon;
 	}
