@@ -35,6 +35,7 @@ allprojects {
     repositories {
         mavenLocal()
         maven { url "https://s01.oss.sonatype.org/content/groups/public" }
+        maven { url "https://maven.shedaniel.me/" }
     }
 
     tasks.withType(JavaCompile) {
