@@ -14,12 +14,17 @@ public class DyeableWearableArmorDecorationItem extends DyeableMedievalArmorItem
 
     @Override
     public String getName() {
-        return null;
+        return getMaterial().getName();
     }
 
     @Override
     public CompoundTag getItemArmorDecorationData(ItemStack stack) {
-        return null;
+        CompoundTag compoundnbt = new CompoundTag();
+
+        compoundnbt.putString("name", this.getName());
+        compoundnbt.putBoolean("dyeable", true);
+        compoundnbt.putInt("color", 1);
+        return compoundnbt;
     }
 
     @Override

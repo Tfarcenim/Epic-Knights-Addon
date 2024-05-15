@@ -16,12 +16,17 @@ public class WearableArmorDecorationItem extends MedievalArmorItem implements Ar
 
     @Override
     public String getName() {
-        return null;
+        return this.getMaterial().getName();
     }
 
     @Override
     public CompoundTag getItemArmorDecorationData(ItemStack stack) {
-        return null;
+            CompoundTag compoundnbt = new CompoundTag();
+
+            compoundnbt.putString("name", this.getName());
+            compoundnbt.putBoolean("dyeable", true);
+            compoundnbt.putInt("color", 1);
+            return compoundnbt;
     }
 
     @Override
