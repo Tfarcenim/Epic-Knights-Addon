@@ -3,12 +3,19 @@ package com.magistuarmory.addon.client.render.model;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.client.render.model.armor.*;
 import com.magistuarmory.addon.client.render.model.decoration.*;
+import com.magistuarmory.addon.item.AddonItems;
+import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import com.magistuarmory.client.render.model.decoration.RondelModel;
 import com.magistuarmory.client.render.model.decoration.TopDecorationModel;
+import com.magistuarmory.item.ArmorDecoration;
+import com.magistuarmory.item.ArmorDecorationItem;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -150,27 +157,23 @@ public class AddonModels {
 	public static final ModelLayerLocation SILVER_CROSS_NECKLACE_LOCATION = addDecorationModel("silver_cross_necklace", () -> NECKLACE_MODEL);
 	public static final ModelLayerLocation GOLDEN_CROSS_NECKLACE_LOCATION = addDecorationModel("golden_cross_necklace", () -> NECKLACE_MODEL);
 
-	public static ModelLayerLocation addDecorationModel(String name, Supplier<LayerDefinition> definition)
-	{
+	public static ModelLayerLocation addDecorationModel(String name, Supplier<LayerDefinition> definition) {
 		ModelLayerLocation location = createDecorationLocation(name);
 		layers.put(location, definition);
 		return location;
 	}
 
-	public static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> definition)
-	{
+	public static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> definition) {
 		ModelLayerLocation location = createArmorLocation(name);
 		layers.put(location, definition);
 		return location;
 	}
 
-	public static ModelLayerLocation createDecorationLocation(String name)
-	{
+	public static ModelLayerLocation createDecorationLocation(String name) {
 		return createDecorationLocation(new ResourceLocation(EpicKnightsAddon.ID, name));
 	}
 
-	public static ModelLayerLocation createArmorLocation(String name)
-	{
+	public static ModelLayerLocation createArmorLocation(String name) {
 		return createArmorLocation(new ResourceLocation(EpicKnightsAddon.ID, name));
 	}
 
@@ -178,34 +181,38 @@ public class AddonModels {
 		layers.forEach(EntityModelLayerRegistry::register);
 	}
 
-	public ModelLayerLocation createLocation(String name)
-	{
+	public ModelLayerLocation createLocation(String name) {
 		return createLocation(new ResourceLocation(EpicKnightsAddon.ID, name));
 	}
 
-	public ModelLayerLocation createLocation(String name, String layer)
-	{
+	public ModelLayerLocation createLocation(String name, String layer) {
 		return createLocation(new ResourceLocation(EpicKnightsAddon.ID, name), layer);
 	}
 
-	public static ModelLayerLocation createDecorationLocation(ResourceLocation location)
-	{
+	public static ModelLayerLocation createDecorationLocation(ResourceLocation location) {
 		return createLocation(location, "decorations");
 	}
 
-	public static ModelLayerLocation createArmorLocation(ResourceLocation location)
-	{
+	public static ModelLayerLocation createArmorLocation(ResourceLocation location) {
 		return createLocation(location, "armor");
 	}
 
-	public static ModelLayerLocation createLocation(ResourceLocation location)
-	{
+	public static ModelLayerLocation createLocation(ResourceLocation location) {
 		return createLocation(location, "main");
 	}
 
-	public static ModelLayerLocation createLocation(ResourceLocation location, String layer)
-	{
+	public static ModelLayerLocation createLocation(ResourceLocation location, String layer) {
 		return new ModelLayerLocation(location, layer);
+	}
+
+	public static <T extends LivingEntity> void addModels(Map<String, ArmorDecorationModel<T>> modelMap) {
+		//for (Supplier<? extends ArmorDecorationItem> a : AddonItems.ARMOR_DECORATION_ITEMS) {
+			//modelMap.put(a.get().getName(),)
+		//	String path = a.get().getName();
+		EntityModelSet entityModelSet = Minecraft.getInstance().getEntityModels();
+			modelMap.putIfAbsent(new ResourceLocation(EpicKnightsAddon.ID,"steel_skirt").toString(), new AddonArmorDecorationModel<>(entityModelSet.
+					bakeLayer(createDecorationLocation(new ResourceLocation(EpicKnightsAddon.ID,"steel_skirt")))));
+		//}
 	}
 
 }
