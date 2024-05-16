@@ -3,12 +3,9 @@ package com.magistuarmory.addon.client.render.model;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.client.render.model.armor.*;
 import com.magistuarmory.addon.client.render.model.decoration.*;
-import com.magistuarmory.addon.item.AddonItems;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import com.magistuarmory.client.render.model.decoration.RondelModel;
 import com.magistuarmory.client.render.model.decoration.TopDecorationModel;
-import com.magistuarmory.item.ArmorDecoration;
-import com.magistuarmory.item.ArmorDecorationItem;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -18,12 +15,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class AddonModels {
 
 	public static final Map<ModelLayerLocation, Supplier<LayerDefinition>> layers = new HashMap<>();
+	static final Set<ResourceLocation> deco = new HashSet<>();
 
 
 	public static final LayerDefinition SKIRT_MODEL = SkirtModel.createLayer();
@@ -160,6 +160,7 @@ public class AddonModels {
 	public static ModelLayerLocation addDecorationModel(String name, Supplier<LayerDefinition> definition) {
 		ModelLayerLocation location = createDecorationLocation(name);
 		layers.put(location, definition);
+		deco.add(new ResourceLocation(EpicKnightsAddon.ID,name));
 		return location;
 	}
 
@@ -209,10 +210,14 @@ public class AddonModels {
 		//for (Supplier<? extends ArmorDecorationItem> a : AddonItems.ARMOR_DECORATION_ITEMS) {
 			//modelMap.put(a.get().getName(),)
 		//	String path = a.get().getName();
-		EntityModelSet entityModelSet = Minecraft.getInstance().getEntityModels();
-			modelMap.putIfAbsent(new ResourceLocation(EpicKnightsAddon.ID,"steel_skirt").toString(), new AddonArmorDecorationModel<>(entityModelSet.
-					bakeLayer(createDecorationLocation(new ResourceLocation(EpicKnightsAddon.ID,"steel_skirt")))));
-		//}
+
+		for (ResourceLocation resourceLocation : deco) {
+
+			EntityModelSet entityModelSet = Minecraft.getInstance().getEntityModels();
+			modelMap.putIfAbsent(resourceLocation.toString(), new AddonArmorDecorationModel<>(entityModelSet.
+					bakeLayer(createDecorationLocation(resourceLocation))));
+			//}
+		}
 	}
 
 }
