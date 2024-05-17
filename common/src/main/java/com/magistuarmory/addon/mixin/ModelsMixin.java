@@ -1,6 +1,6 @@
 package com.magistuarmory.addon.mixin;
 
-import com.magistuarmory.addon.client.render.model.AddonModels;
+import com.magistuarmory.addon.client.render.model.AddonModelLayers;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.client.render.model.decoration.ArmorDecorationModel;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +22,6 @@ public class ModelsMixin<T extends LivingEntity> {
     @Inject(method = "<init>",at = @At("RETURN"))
     private void addAddonModels(CallbackInfo ci) {
         this.map = new HashMap<>(map);
-        AddonModels.addModels(map);
+        AddonModelLayers.addModels(map);
     }
 }

@@ -1,6 +1,6 @@
 package com.magistuarmory.addon.item;
 
-import com.magistuarmory.EpicKnights;
+import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.item.armor.AddonArmorType;
 import com.magistuarmory.addon.item.armor.AddonArmorTypes;
@@ -304,7 +304,7 @@ public class AddonItems {
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> PATRICIAN_TUHER_HELMET = addMedievalArmorItem("patrician_tuher_helmet", AddonArmorTypes.PATRICIAN_TUHER_HELMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 
-	public static final @Nullable RegistrySupplier<MedievalArmorItem> LATE_KETTLEHAT = addMedievalArmorItem("late_kettlehat", AddonArmorTypes.LATE_KETTLEHAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
+	public static final @Nullable RegistrySupplier<MedievalArmorItem> LATE_KETTLEHAT = addMedievalArmorItem("late_kettlehat", AddonArmorTypes.LATE_KETTLEHAT, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR), AddonModelMaps.ArmorModels.LATE_KETTLEHAT);
 
 	public static final @Nullable RegistrySupplier<MedievalArmorItem> CLOSE_HELMET = addMedievalArmorItem("close_helmet", AddonArmorTypes.CLOSE_HELMET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeTabs.ARMOR));
 
@@ -443,6 +443,15 @@ public class AddonItems {
 		if (type.isDisabled())
 			return null;
 		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties);
+		ARMOR_ITEMS.add(armor);
+		return armor;
+	}
+
+	public static @Nullable RegistrySupplier<MedievalArmorItem> addMedievalArmorItem(String id, AddonArmorType type, EquipmentSlot slot, Item.Properties properties, AddonModelMaps.ArmorModels armorModels)
+	{
+		if (type.isDisabled())
+			return null;
+		RegistrySupplier<MedievalArmorItem> armor = AddonItemRegistryHelper.registerMedievalArmorItem(id, type, slot, properties,armorModels);
 		ARMOR_ITEMS.add(armor);
 		return armor;
 	}

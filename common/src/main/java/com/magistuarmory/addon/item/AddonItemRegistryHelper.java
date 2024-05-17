@@ -1,11 +1,11 @@
 package com.magistuarmory.addon.item;
 
+import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -39,7 +39,7 @@ public class AddonItemRegistryHelper {
     }
 
     @ExpectPlatform
-    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, Models.ArmorEnum modelkey) {
+    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, AddonModelMaps.ArmorModels modelkey) {
         throw new AssertionError();
     }
 

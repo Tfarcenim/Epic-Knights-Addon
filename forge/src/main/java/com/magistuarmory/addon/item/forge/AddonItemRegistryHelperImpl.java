@@ -1,5 +1,7 @@
 package com.magistuarmory.addon.item.forge;
 
+import com.magistuarmory.addon.client.render.model.AddonModels;
+import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.addon.forge.item.WearableArmorDecorationItemForge;
 import com.magistuarmory.addon.item.AddonItems;
 import com.magistuarmory.addon.item.DyeableWearableArmorDecorationItem;
@@ -31,58 +33,56 @@ public class AddonItemRegistryHelperImpl {
     }
 
     public static RegistrySupplier<DyeableWearableArmorDecorationItem> registerDyeableWearableArmorDecorationItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor) {
-        return AddonItems.ITEMS.register(id, () -> new DyeableWearableArmorDecorationItem(material, type, properties,0xffffff));
+        return AddonItems.ITEMS.register(id, () -> new DyeableWearableArmorDecorationItem(material, type, properties, 0xffffff));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerKnightItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties)
-    {
+    public static RegistrySupplier<MedievalArmorItem> registerKnightItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties) {
         return AddonItems.ITEMS.register(id, () -> new KnightItemForge(material, type, properties));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerJoustingItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties)
-    {
+    public static RegistrySupplier<MedievalArmorItem> registerJoustingItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties) {
         return AddonItems.ITEMS.register(id, () -> new JoustingItemForge(material, type, properties));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties)
-    {
+    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties) {
         return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, Models.ArmorEnum modelkey)
-    {
-        return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties)
-        { @Override public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) { return slot0 == type ? Models.ARMOR_MAP.get(modelkey) : super.getArmorModel(slot0, _default); } });
+    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, AddonModelMaps.ArmorModels modelkey) {
+        return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties) {
+            @Override
+            public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
+                return slot0 == type ? AddonModels.ARMOR.get(modelkey) : super.getArmorModel(slot0, _default);
+            }
+        });
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor)
-    {
+    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor) {
         return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor, Models.ArmorEnum modelkey)
-    {
-        return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor)
-        { @Override public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) { return slot0 == type ? Models.ARMOR_MAP.get(modelkey) : super.getArmorModel(slot0, _default); } });
+    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor, Models.ArmorEnum modelkey) {
+        return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor) {
+            @Override
+            public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
+                return slot0 == type ? Models.ARMOR_MAP.get(modelkey) : super.getArmorModel(slot0, _default);
+            }
+        });
     }
 
-    public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
-    {
+    public static RegistrySupplier<MedievalWeaponItem> registerMedievalWeaponItem(String id, Item.Properties properties, ModItemTier material, WeaponType type) {
         return AddonItems.ITEMS.register(id, () -> new MedievalWeaponItemForge(properties, material, type));
     }
 
-    public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type)
-    {
+    public static RegistrySupplier<MedievalWeaponItem> registerLanceItem(String id, Item.Properties properties, ModItemTier material, WeaponType type) {
         return AddonItems.ITEMS.register(id, () -> new LanceItemForge(properties, material, type));
     }
 
-    public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
-    {
+    public static RegistrySupplier<MedievalShieldItem> registerMedievalShieldItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey) {
         return AddonItems.ITEMS.register(id, () -> new MedievalShieldItemForge(id, name, properties, material, paintable, is3d, type, modelkey));
     }
 
-    public static RegistrySupplier<MedievalShieldItem> registerPaviseItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey)
-    {
+    public static RegistrySupplier<MedievalShieldItem> registerPaviseItem(String id, String name, Item.Properties properties, ModItemTier material, boolean paintable, boolean is3d, ShieldType type, Models.ShieldEnum modelkey) {
         return AddonItems.ITEMS.register(id, () -> new PaviseItemForge(id, name, properties, material, paintable, is3d, type, modelkey));
     }
 }

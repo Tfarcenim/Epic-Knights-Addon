@@ -1,6 +1,6 @@
 package com.magistuarmory.addon;
 
-import com.magistuarmory.addon.client.render.model.AddonModels;
+import com.magistuarmory.addon.client.render.model.AddonModelLayers;
 import com.magistuarmory.addon.config.AddonConfig;
 import com.magistuarmory.addon.item.AddonItems;
 import com.magistuarmory.addon.misc.AddonMerchOffers;
@@ -27,6 +27,6 @@ public class EpicKnightsAddon
 	    AddonItems.init();
 	    AddonMerchOffers.init();
 		if (Platform.getEnv() == EnvType.CLIENT)
-			AddonModels.init();
+			AddonModelLayers.init();
     }
 }
