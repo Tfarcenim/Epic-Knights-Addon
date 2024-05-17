@@ -48,7 +48,7 @@ public class AddonItemRegistryHelperImpl {
         return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, AddonModelMaps.ArmorModels modelkey) {
+    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, String modelkey) {
         return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties) {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {

@@ -39,7 +39,7 @@ public class AddonItemRegistryHelper {
     }
 
     @ExpectPlatform
-    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, AddonModelMaps.ArmorModels modelkey) {
+    public static RegistrySupplier<MedievalArmorItem> registerMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, String modelkey) {
         throw new AssertionError();
     }
 
