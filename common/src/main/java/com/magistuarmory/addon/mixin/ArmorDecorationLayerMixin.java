@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class ArmorDecorationLayerMixin {
 
     /**
-     * @author
-     * @reason
+     * @author no
+     * @reason no
      */
     @Overwrite(remap = false)
     public ResourceLocation getTexture(String name, boolean overlay) {
