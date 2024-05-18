@@ -1,6 +1,5 @@
 package com.magistuarmory.addon.item;
 
-import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.client.render.model.Models;
 import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.MedievalArmorItem;

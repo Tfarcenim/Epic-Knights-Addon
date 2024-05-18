@@ -1,16 +1,11 @@
 package com.magistuarmory.addon.item;
 
-import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.item.armor.AddonArmorType;
 import com.magistuarmory.addon.item.armor.AddonArmorTypes;
 import com.magistuarmory.client.render.ModRender;
 import com.magistuarmory.client.render.model.Models;
-import com.magistuarmory.item.ArmorDecorationItem;
-import com.magistuarmory.item.DyeableArmorDecorationItem;
-import com.magistuarmory.item.MedievalWeaponItem;
-import com.magistuarmory.item.ModItemTier;
-import com.magistuarmory.item.WeaponType;
+import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.ArmorType;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import com.magistuarmory.item.armor.MedievalHorseArmorItem;

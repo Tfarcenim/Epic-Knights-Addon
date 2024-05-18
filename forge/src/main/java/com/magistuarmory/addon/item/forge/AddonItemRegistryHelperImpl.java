@@ -1,7 +1,6 @@
 package com.magistuarmory.addon.item.forge;
 
 import com.magistuarmory.addon.client.render.model.AddonModels;
-import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.addon.forge.item.WearableArmorDecorationItemForge;
 import com.magistuarmory.addon.item.AddonItems;
 import com.magistuarmory.addon.item.DyeableWearableArmorDecorationItem;
@@ -15,11 +14,7 @@ import com.magistuarmory.forge.item.armor.DyeableMedievalArmorItemForge;
 import com.magistuarmory.forge.item.armor.JoustingItemForge;
 import com.magistuarmory.forge.item.armor.KnightItemForge;
 import com.magistuarmory.forge.item.armor.MedievalArmorItemForge;
-import com.magistuarmory.item.MedievalShieldItem;
-import com.magistuarmory.item.MedievalWeaponItem;
-import com.magistuarmory.item.ModItemTier;
-import com.magistuarmory.item.ShieldType;
-import com.magistuarmory.item.WeaponType;
+import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.model.HumanoidModel;
@@ -61,11 +56,11 @@ public class AddonItemRegistryHelperImpl {
         return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor));
     }
 
-    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor, Models.ArmorEnum modelkey) {
+    public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor, String modelkey) {
         return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor) {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
-                return slot0 == type ? Models.ARMOR_MAP.get(modelkey) : super.getArmorModel(slot0, _default);
+                return slot0 == type ? AddonModels.ARMOR.get(modelkey) : super.getArmorModel(slot0, _default);
             }
         });
     }
