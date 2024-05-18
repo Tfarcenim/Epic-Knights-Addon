@@ -38,13 +38,13 @@ public class AddonArmorType implements ArmorMaterial {
         this.modellocation = modellocation;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.durability = Util.make(new EnumMap(EquipmentSlot.class), (enumMap) -> {
+        this.durability = Util.make(new EnumMap<>(EquipmentSlot.class), (enumMap) -> {
             enumMap.put(EquipmentSlot.FEET, durability[0]);
             enumMap.put(EquipmentSlot.LEGS, durability[1]);
             enumMap.put(EquipmentSlot.CHEST, durability[2]);
             enumMap.put(EquipmentSlot.HEAD, durability[3]);
         });
-        this.defenseForSlot = Util.make(new EnumMap(EquipmentSlot.class), (enumMap) -> {
+        this.defenseForSlot = Util.make(new EnumMap<>(EquipmentSlot.class), (enumMap) -> {
             enumMap.put(EquipmentSlot.FEET, defenseForSlot[0]);
             enumMap.put(EquipmentSlot.LEGS, defenseForSlot[1]);
             enumMap.put(EquipmentSlot.CHEST, defenseForSlot[2]);
@@ -110,6 +110,10 @@ public class AddonArmorType implements ArmorMaterial {
     public boolean isDisabled()
     {
         return !this.enabled;
+    }
+
+    public ResourceLocation getModellocation() {
+        return modellocation;
     }
 
   /*  @Environment(EnvType.CLIENT)

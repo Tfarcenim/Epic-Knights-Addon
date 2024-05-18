@@ -1,6 +1,5 @@
 package com.magistuarmory.addon.client.render.model;
 
-import com.magistuarmory.addon.misc.AddonModelMaps;
 import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.client.render.model.armor.*;
 import com.magistuarmory.addon.client.render.model.decoration.*;
@@ -24,8 +23,11 @@ import java.util.function.Supplier;
 public class AddonModelLayers {
 
 	public static final Map<ModelLayerLocation, Supplier<LayerDefinition>> layers = new HashMap<>();
+
+	static final Map<ResourceLocation,Supplier<LayerDefinition>> layerMap = new HashMap<>();
+
 	static final Set<ResourceLocation> deco = new HashSet<>();
-	static final Set<ModelLayerLocation> armor = new HashSet<>();
+	static final Set<ResourceLocation> armor = new HashSet<>();
 
 	public static final LayerDefinition SKIRT_MODEL = SkirtModel.createLayer();
 	public static final LayerDefinition HELMET_RONDEL_MODEL = HelmetRondelModel.createLayer();
@@ -151,6 +153,7 @@ public class AddonModelLayers {
 	public static final ModelLayerLocation RED_PUFF_AND_SLASH_SLEEVES_LOCATION = addDecorationModel("red_puff_and_slash_sleeves", () -> PUFF_AND_SLASH_SLEEVES_MODEL);
 	public static final ModelLayerLocation BLACK_PUFF_AND_SLASH_SLEEVES_LOCATION = addDecorationModel("black_puff_and_slash_sleeves", () -> PUFF_AND_SLASH_SLEEVES_MODEL);
 	public static final ModelLayerLocation WHITE_PUFF_AND_SLASH_SLEEVES_LOCATION = addDecorationModel("white_puff_and_slash_sleeves", () -> PUFF_AND_SLASH_SLEEVES_MODEL);
+
 	public static final ModelLayerLocation DARK_GORGET_LOCATION = addDecorationModel("dark_gorget", () -> GORGET_MODEL);
 	public static final ModelLayerLocation GILDED_GORGET_LOCATION = addDecorationModel("gilded_gorget", () -> GORGET_MODEL);
 	public static final ModelLayerLocation SQUARE_BESAGEWS_LOCATION = addDecorationModel("square_besagews", () -> RONDEL_MODEL);
@@ -168,10 +171,12 @@ public class AddonModelLayers {
 		return location;
 	}
 
+
 	public static ModelLayerLocation addArmorModel(String name, Supplier<LayerDefinition> definition) {
 		ModelLayerLocation location = createArmorLocation(name);
 		layers.put(location, definition);
-		armor.add(location);
+		layerMap.put(new ResourceLocation(EpicKnightsAddon.ID,name),definition);
+		armor.add(location.getModel());
 		return location;
 	}
 
