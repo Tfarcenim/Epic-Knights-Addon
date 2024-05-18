@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class AddonModels {
-    public static final Map<ResourceLocation, HumanoidModel<? extends LivingEntity>> ARMOR = new HashMap<>();
+    public static final Map<Item, HumanoidModel<? extends LivingEntity>> ARMOR = new HashMap<>();
     public static void init() {
      //   for (ModelLayerLocation layerLocation :AddonModelLayers.armor) {
       //      ARMOR.put(layerLocation.getModel().getPath(),new HumanoidModel<>(AddonModelLayers.layers.get(layerLocation).get().bakeRoot()));
@@ -34,15 +35,12 @@ public class AddonModels {
                 if (!modelLocation.getPath().equals("default")) {
 
                     if (modelLocation.getNamespace().equals(EpicKnights.ID)) {
-
                         Models.ArmorEnum armorEnum = Models.ArmorEnum.valueOf(modelLocation.getPath().toUpperCase(Locale.ROOT));
-
-                        ARMOR.put(registrySupplier.getId(), Models.ARMOR_MAP.get(armorEnum));
+                        ARMOR.put(registrySupplier.get(), Models.ARMOR_MAP.get(armorEnum));
                     } else {
                         Supplier<LayerDefinition> layerDefinitionSupplier = AddonModelLayers.layerMap.get(modelLocation);
-
                         if (layerDefinitionSupplier != null) {
-                            ARMOR.put(registrySupplier.getId(), new HumanoidModel<>(layerDefinitionSupplier.get().bakeRoot()));
+                            ARMOR.put(registrySupplier.get(), new HumanoidModel<>(layerDefinitionSupplier.get().bakeRoot()));
                         } else {
                             //   ARMOR.put(addonArmorType.getName(), new HumanoidModel<>(layerDefinitionSupplier.get().bakeRoot()));
                         }

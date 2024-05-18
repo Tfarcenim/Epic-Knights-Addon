@@ -51,7 +51,7 @@ public class AddonItemRegistryHelperImpl {
         return AddonItems.ITEMS.register(id, () -> new MedievalArmorItemForge(material, type, properties) {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
-                return slot0 == type ? AddonModels.ARMOR.get(new ResourceLocation(EpicKnightsAddon.ID,id)) : super.getArmorModel(slot0, _default);
+                return slot0 == type ? AddonModels.ARMOR.get(this) : super.getArmorModel(slot0, _default);
             }
         });
     }
@@ -61,8 +61,7 @@ public class AddonItemRegistryHelperImpl {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
                 if (slot0 == type) {
-                    ResourceLocation model = new ResourceLocation(EpicKnightsAddon.ID,id);
-                    HumanoidModel<? extends LivingEntity> humanoidModel = AddonModels.ARMOR.get(model);
+                    HumanoidModel<? extends LivingEntity> humanoidModel = AddonModels.ARMOR.get(this);
                     return humanoidModel;
                 }
                 return super.getArmorModel(slot0, _default);
@@ -74,7 +73,7 @@ public class AddonItemRegistryHelperImpl {
         return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor) {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
-                return slot0 == type ? AddonModels.ARMOR.getOrDefault(new ResourceLocation(EpicKnightsAddon.ID,id),_default) : super.getArmorModel(slot0, _default);
+                return slot0 == type ? AddonModels.ARMOR.getOrDefault(this,_default) : super.getArmorModel(slot0, _default);
             }
         });
     }
