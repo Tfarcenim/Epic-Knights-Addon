@@ -1,5 +1,6 @@
 package com.magistuarmory.addon.item.forge;
 
+import com.magistuarmory.addon.EpicKnightsAddon;
 import com.magistuarmory.addon.client.render.model.AddonModels;
 import com.magistuarmory.addon.forge.item.WearableArmorDecorationItemForge;
 import com.magistuarmory.addon.item.AddonItems;
@@ -18,6 +19,7 @@ import com.magistuarmory.item.*;
 import com.magistuarmory.item.armor.MedievalArmorItem;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -53,14 +55,19 @@ public class AddonItemRegistryHelperImpl {
     }
 
     public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor) {
-        return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor));
+        return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor) {
+            @Override
+            public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
+                return slot0 == type ? AddonModels.ARMOR.get(new ResourceLocation(EpicKnightsAddon.ID,id).toString()) : super.getArmorModel(slot0, _default);
+            }
+        });
     }
 
     public static RegistrySupplier<MedievalArmorItem> registerDyeableMedievalArmorItem(String id, ArmorMaterial material, EquipmentSlot type, Item.Properties properties, int defaultcolor, String modelkey) {
         return AddonItems.ITEMS.register(id, () -> new DyeableMedievalArmorItemForge(material, type, properties, defaultcolor) {
             @Override
             public HumanoidModel<?> getArmorModel(EquipmentSlot slot0, HumanoidModel<?> _default) {
-                return slot0 == type ? AddonModels.ARMOR.get(modelkey) : super.getArmorModel(slot0, _default);
+                return slot0 == type ? AddonModels.ARMOR.getOrDefault(modelkey,_default) : super.getArmorModel(slot0, _default);
             }
         });
     }
